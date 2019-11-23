@@ -6,7 +6,7 @@ import Logo from "../../assets/Talk_Logo.png";
 
 import { Form, Container } from "./styles";
 
-export default function SignUp(){
+export default function SignUp({history}){
   const[username, setUsername] = useState('');
   const[email, setEmail] = useState('');
   const[password, setPassword] = useState('');
@@ -19,7 +19,7 @@ export default function SignUp(){
     } else {
       try {
         await api.post("/users", { username, email, password });
-        this.props.history.push("/");
+        history.push("/");
       } catch (err) {
         console.log(err);
         setError("Ocorreu um erro ao registrar sua conta.");

@@ -1,0 +1,23 @@
+html {
+  height: 100vh;
+  background: #000;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  
+}
+
+.main__page{
+  height: 100vh;
+  margin-top: 78px;
+  display: flex;
+  justify-content: center;
+  background:rgb(45, 1, 95);
+}

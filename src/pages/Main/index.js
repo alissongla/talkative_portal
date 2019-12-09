@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import Toolbar from '../../components/Toolbar/Toolbar';
-import SideDrawer from '../../components/SideDrawer/SideDrawer';
-import Backdrop from '../../components/Backdrop/Backdrop';
 
 //Imports de rotas
 import Welcome from '../Welcome/Welcome';
@@ -20,33 +18,15 @@ import {
 import './styles.css';
 
 class Main extends Component {
-  state = {
-    sideDrawerOpen: false
-  };
-  drawerToggleClickHandler = () => {
-    this.setState((prevState) => {
-      return {sideDrawerOpen: !prevState.sideDrawerOpen};
-    })
-  }
-
-  backdropClickHandler = () => {
-    this.setState({sideDrawerOpen: false})
-  }
+ 
   render() {
-    let backdrop;
 
-    if(this.state.sideDrawerOpen){
-      backdrop = <Backdrop click={this.backdropClickHandler}/>;
-    }
     return(
       <div className="App">
-        <Toolbar drawerClickHandler={this.drawerToggleClickHandler}/>
-        <SideDrawer show={this.state.sideDrawerOpen}/>
-        {backdrop}
+        <Toolbar/>     
         <main className='main__page'>
           <Container>
             <Switch>
-              
               <Route exact path='/app' component={Welcome}/>
               <Route path='/app/class' component={Aula}/>
               <Route path='/app/module' component={Modulo}/>

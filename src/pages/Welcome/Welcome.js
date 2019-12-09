@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import api from "../../services/api";
-import { getToken } from "../../services/auth";
+import React from "react";
 
 // reactstrap components
 import {
-  Button,
   Card,
   CardBody,
-  Form,
-  Input,
   Container
 } from "reactstrap";
 // core components

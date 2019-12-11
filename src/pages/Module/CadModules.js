@@ -11,7 +11,8 @@ import {
   CardBody,
   Form,
   Input,
-  Container
+  Container,
+  Label
 } from "reactstrap";
 // core components
 // mapTypeId={google.maps.MapTypeId.ROADMAP}
@@ -50,7 +51,9 @@ export default function CadModule({history}){
             <CardBody className="px-lg-5 py-lg-5">
               <Form onSubmit={handleCadModule}>
                 {error && <p>{error}</p>}
+                <Label for="moduleInput">Módulo</Label>
                 <Input
+                  id='moduleInput'
                   type="text"
                   placeholder="Nome do módulo"
                   value={moduleName}

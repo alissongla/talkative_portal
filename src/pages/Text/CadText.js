@@ -9,7 +9,8 @@ import {
   CardBody,
   Form,
   Input,
-  Container
+  Container,
+  Label
 } from "reactstrap";
 // core components
 // mapTypeId={google.maps.MapTypeId.ROADMAP}
@@ -48,7 +49,9 @@ export default function CadText({history}){
             <CardBody className="px-lg-5 py-lg-5">
               <Form onSubmit={handleCadModule}>
                 {error && <p>{error}</p>}
+                <Label for="textInput">Texto</Label>
                 <Input
+                  id='textInput'
                   type='textarea'
                   placeholder="Texto "
                   value={textName}

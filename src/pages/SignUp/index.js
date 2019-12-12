@@ -1,27 +1,34 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import Loader from 'react-loader-spinner';
 
 import Logo from "../../assets/Talk_Logo.png";
 
 import { Form, Container } from "./styles";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function SignUp({history}){
   const[username, setUsername] = useState('');
   const[email, setEmail] = useState('');
   const[password, setPassword] = useState('');
   const[error, setError] = useState('');
+  const[loading,setLoading] = useState(false);
 
   async function handleSignUp(e){
     e.preventDefault();
+    setLoading(true);
     if (!username || !email || !password) {
+      setLoading(false);
       setError("Preencha todos os dados para se cadastrar");
     } else {
       try {
         await api.post("/users", { username, email, password });
+        setLoading(false);
         history.push("/");
       } catch (err) {
         console.log(err);
+        setLoading(false);
         setError("Ocorreu um erro ao registrar sua conta.");
       }
     }
@@ -50,6 +57,13 @@ export default function SignUp({history}){
           value={password}
           onChange={event => setPassword(event.target.value)}
         />
+        <Loader
+            type="TailSpin"
+            visible={loading}
+            color="#00BFFF"
+            height={100}
+            width={100}
+          />
         <button type="submit">Cadastrar grátis</button>
         <hr />
         <Link to="/">Fazer login</Link>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
+import Loader from 'react-loader-spinner';
 import { getToken } from "../../services/auth";
 
 // reactstrap components
@@ -13,7 +14,7 @@ import {
   Container,
   Label
 } from "reactstrap";
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function CadExercises({history}){
   const[aulas,setAulas] = useState([]);
@@ -22,6 +23,7 @@ export default function CadExercises({history}){
   const[answer,setAnswer] = useState('');
   const[exercise,setExercise] = useState('');
   const[error,setError] = useState('');
+  const[loading,setLoading] = useState(false);
   
   useEffect(() => {
     try {
@@ -42,8 +44,9 @@ export default function CadExercises({history}){
 
   async function handleCadExercise(e){
     e.preventDefault();
-
+    setLoading(true);
     if (!classCod || !language || !exercise || !answer) {
+      setLoading(false);
       setError("Preencha os dados para continuar!");
     } else {
       try {
@@ -57,13 +60,13 @@ export default function CadExercises({history}){
             'Authorization': 'Bearer ' + getToken
           }
         });
+        setLoading(false);
         alert('Exercício cadastrado com sucesso');
-        setClassCod('');
-        setLanguage('');
         setAnswer('');
         setExercise('');
         setError('');
       } catch (err) {
+        setLoading(false);
         setError("Houve um problema para cadastrar o exercício!")      
       }
     }
@@ -126,6 +129,13 @@ export default function CadExercises({history}){
                   type="submit"  
                   style={{marginTop: '1%', backgroundColor:'#000', color: '#FFF', fontWeight: 'bold', borderColor: '#000',}}>Cadastrar exercício
                 </Button>
+                <Loader
+                  type="TailSpin"
+                  visible={loading}
+                  color="#00BFFF"
+                  height={100}
+                  width={100}
+                />
               </Form>
             </CardBody>
           </Card>

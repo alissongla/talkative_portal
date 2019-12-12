@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
+import Loader from 'react-loader-spinner';
 import { getToken } from "../../services/auth";
 
 // reactstrap components
@@ -13,6 +14,7 @@ import {
   Container,
   Label
 } from "reactstrap";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 // core components
 
 // mapTypeId={google.maps.MapTypeId.ROADMAP}
@@ -24,6 +26,7 @@ export default function CadClasses({history}){
   const[moduleCod,setModuleCod] = useState('');
   const[nameClass,setNameClass] = useState('');
   const[error,setError] = useState('');
+  const[loading,setLoading] = useState(false);
   
   useEffect(() => {
     try {
@@ -59,9 +62,11 @@ export default function CadClasses({history}){
 
   async function handleCadClass(e){
     e.preventDefault();
+    setLoading(true);
     console.log(textCod);
     console.log(moduleCod);
     if (!textCod || !moduleCod) {
+      setLoading(false);
       setError("Preencha os dados para continuar!");
     } else {
       try {
@@ -74,9 +79,11 @@ export default function CadClasses({history}){
             'Authorization': 'Bearer ' + getToken
           }
         });
+        setLoading(false);
         alert('Aula cadastrada com sucesso');
         
       } catch (err) {
+        setLoading(false);
         setError("Houve um problema para cadastrar o modulo!")      
       }
     }
@@ -133,6 +140,13 @@ export default function CadClasses({history}){
                   type="submit"  
                   style={{marginTop: '1%', backgroundColor:'#000', color: '#FFF', fontWeight: 'bold', borderColor: '#000',}}>Cadastrar aula
                 </Button>
+                <Loader
+                  type="TailSpin"
+                  visible={loading}
+                  color="#00BFFF"
+                  height={100}
+                  width={100}
+                />
               </Form>
             </CardBody>
           </Card>
